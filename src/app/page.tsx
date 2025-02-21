@@ -1,23 +1,21 @@
-"use client"
-
 import { authApi } from "@/lib/axiosInstance";
 import { User } from "@/types/user"
 import { useEffect, useState } from "react"
 
-export default function HomePage () {
+export default function HomePage() {
   const [userLogin, setUserLogin] = useState<User[]>([]);
 
   useEffect(()=>{
-    const fetchData = async () =>{
+    const fetchDate = async () => {
       try{
-       const response = await authApi.get<User[]>("/login");
-       setUserLogin(response.data); 
+        const response = await authApi.get<User[]>("/login");
+        setUserLogin(response.data);
       }catch(error){
-        console.error("fail", error);
+        console.error('fail', error);
       }
     }
-    fetchData();
-  },[]);
+    fetchDate();
+  }, []);
 
   return(
     <div>
