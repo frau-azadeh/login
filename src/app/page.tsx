@@ -17,13 +17,13 @@ export default function HomePage() {
     fetchDate();
   }, []);
 
-  
+
   return(
     <div>
       <ul>
         {userLogin.map((user)=>(
           <li key={user.id}>
-            <p>{user.fullName}</p>
+            <p className="text-blue">Name: {user.fullName}</p>
             <p>{user.role}</p>
           </li>
         ))}
