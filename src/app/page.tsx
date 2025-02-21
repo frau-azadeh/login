@@ -25,7 +25,7 @@ export default function HomePage() {
       <ul>
         {userLogin.map((user)=>(
           <li key={user.id}>
-            <p className="text-blue">Name: {user.fullName}</p>
+            <p className="text-blue-900">Name: {user.fullName}</p>
             <p>{user.role}</p>
           </li>
         ))}
