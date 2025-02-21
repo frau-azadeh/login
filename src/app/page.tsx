@@ -17,6 +17,7 @@ export default function HomePage() {
     fetchDate();
   }, []);
 
+  
   return(
     <div>
       <ul>
