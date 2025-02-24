@@ -11,9 +11,11 @@
   "dependencies": {
     "@tanstack/react-query": "^5.66.8",
     "axios": "^1.7.9",
+    "i18next": "^24.2.2",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-i18next": "^15.4.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
