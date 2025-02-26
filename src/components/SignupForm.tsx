@@ -1,17 +1,15 @@
-"use client"
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import DatePicker from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
+import { useForm } from "react-hook-form";
+import { FormValues } from "../types/types";
+import TextInput from "./TextInput";
+import DateInput from "./DateInput";
+import GenderSelect from "./GenderSelect";
 
-interface FormValues {
-  fullName: string;
-  birthDate: Date | null;
-  gender: string;
+interface SignupFormProps {
+  onClose: () => void;
 }
 
-const SignupForm = ({ onClose }: { onClose: () => void }) => {
+const SignupForm: React.FC<SignupFormProps> = ({ onClose }) => {
   const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -30,51 +28,25 @@ const SignupForm = ({ onClose }: { onClose: () => void }) => {
         <h2 className="text-xl font-bold text-center mb-4">ثبت‌نام</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* نام و نام خانوادگی */}
-          <div>
-            <input
-              type="text"
-              placeholder="نام و نام خانوادگی"
-              {...register("fullName", { required: "نام و نام خانوادگی الزامی است" })}
-              className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
-          </div>
+          <TextInput
+            label="نام و نام خانوادگی"
+            name="fullName"
+            register={register}
+            error={errors.fullName?.message}
+            placeholder="نام و نام خانوادگی"
+          />
 
-          {/* تاریخ تولد */}
-          <div>
-            <Controller
-              name="birthDate"
-              control={control}
-              rules={{ required: "تاریخ تولد الزامی است" }}
-              render={({ field }) => (
-                <DatePicker
-                  calendar={persian}
-                  locale={persian_fa}
-                  calendarPosition="bottom-right"
-                  value={field.value}
-                  onChange={(date) => field.onChange(date)}
-                  className="w-full p-2 border rounded-lg"
-                />
-              )}
-            />
-            {errors.birthDate && <p className="text-red-500 text-sm">{errors.birthDate.message}</p>}
-          </div>
+          <DateInput
+            name="birthDate"
+            control={control}
+            error={errors.birthDate?.message}
+          />
 
-          {/* جنسیت */}
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center">
-              <input type="radio" value="male" {...register("gender", { required: "لطفاً جنسیت را انتخاب کنید" })} className="mr-1" />
-              مرد
-            </label>
-            <label className="flex items-center">
-              <input type="radio" value="female" {...register("gender", { required: "لطفاً جنسیت را انتخاب کنید" })} className="mr-1" />
-              زن
-            </label>
-          </div>
-          {errors.gender && <p className="text-red-500 text-sm">{errors.gender.message}</p>}
+          <GenderSelect
+            register={register}
+            error={errors.gender?.message}
+          />
 
-          {/* دکمه‌ها */}
           <div className="flex justify-between">
             <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
               انصراف
