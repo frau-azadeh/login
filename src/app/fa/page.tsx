@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '@/i18n';
-import FormComponent from './component/FormComponent';
+import FormComponent from './components/FormComponent';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
