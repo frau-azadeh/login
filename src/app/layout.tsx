@@ -1,7 +1,7 @@
 import QueryProvider from "@/providers/QueryProviders";
 import type { Metadata } from "next";
 import "./globals.css";
-
+import "../styles/fonts.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fa" dir="rtl">
       <body>
          <QueryProvider>{children}</QueryProvider>      </body>
     </html>
