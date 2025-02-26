@@ -15,6 +15,7 @@
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "react-i18next": "^15.4.1",
     "react-multi-date-picker": "^4.5.2"
   },
