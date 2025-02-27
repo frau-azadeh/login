@@ -1,23 +1,22 @@
-import { FC } from "react";
-import { GenderSelectProps } from "../types/types";
+import { GenderSelectProps } from '@/types/types'
+import React, { FC } from 'react'
 
-const GenderSelect: FC<GenderSelectProps> = ({ register, error }) => {
+ const GenderSelect:FC<GenderSelectProps> = ({register, error}) => {
   return (
     <div>
-      <label className="block text-gray-700 text-sm font-medium mb-1">جنسیت</label>
-      <div className="flex items-center space-x-4">
-        <label className="flex items-center">
-          <input type="radio" value="male" {...register("gender")} className="mr-1" />
-          مرد
-        </label>
-        <label className="flex items-center">
-          <input type="radio" value="female" {...register("gender")} className="mr-1" />
-          زن
-        </label>
-      </div>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+        <label className='block text-gray-900 mb-1'>جنسیت: </label>
+          <div className='flex items-center space-x-4'>
+            <label className='flex items-center gap-x-4'>
+              <input type='radio' value="male" {...register("gender")} className='mr-2'/>
+              زن
+            </label>
+            <label className='flex items-center gap-x-4'>
+              <input type="radio" value="female" {...register("gender")} className='mr-2'/>
+              مرد
+            </label>
+          </div>
     </div>
-  );
-};
+  )
+}
 
 export default GenderSelect;
