@@ -1,4 +1,3 @@
-import QueryProvider from "@/providers/QueryProviders";
 import type { Metadata } from "next";
 import "./globals.css";
 import "../styles/fonts.css";
@@ -16,7 +15,8 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
-         <QueryProvider>{children}</QueryProvider>      </body>
+        <h1>سلام</h1>
+            </body>
     </html>
   );
 }
