@@ -1,16 +1,19 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signupSchema, type SignupSchema } from '@/schemas/auth.schema';
-import Input from '@/components/ui/Input';
-import Button from '@/components/ui/Button';
-import { supabase } from '@/lib/supabase';
-import { Mail, Lock, UserRound, Phone } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { showSuccess, showError } from '@/lib/toast';
-import PasswordStrengthMeter from '@/components/PasswordStrengthMeter';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import { supabase } from "@/lib/supabase";
+import { showError, showSuccess } from "@/lib/toast";
+import { Lock, Mail, Phone, UserRound } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import PasswordStrengthMeter from "@/components/PasswordStrengthMeter";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+
+import { type SignupSchema, signupSchema } from "@/schemas/auth.schema";
 
 export default function SignupPage() {
   const {
@@ -20,11 +23,11 @@ export default function SignupPage() {
     formState: { errors, isSubmitting },
   } = useForm<SignupSchema>({
     resolver: zodResolver(signupSchema),
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const router = useRouter();
-  const passwordValue = watch('password');
+  const passwordValue = watch("password");
 
   const onSubmit = async (data: SignupSchema) => {
     const { email, password, fullName, phone } = data;
@@ -38,7 +41,7 @@ export default function SignupPage() {
       if (error) throw new Error(error.message);
 
       if (signUpData.user) {
-        const { error: profileError } = await supabase.from('profiles').insert({
+        const { error: profileError } = await supabase.from("profiles").insert({
           id: signUpData.user.id,
           full_name: fullName,
           phone,
@@ -46,20 +49,20 @@ export default function SignupPage() {
 
         if (profileError) throw new Error(profileError.message);
 
-        showSuccess('ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید.');
-        router.push('/login');
+        showSuccess("ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید.");
+        router.push("/login");
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
-        if (err.message.includes('only request this after')) {
-          showError('لطفاً چند ثانیه صبر کنید و دوباره تلاش کنید.');
+        if (err.message.includes("only request this after")) {
+          showError("لطفاً چند ثانیه صبر کنید و دوباره تلاش کنید.");
         } else {
           showError(err.message);
         }
       } else {
-        showError('خطای ناشناخته‌ای رخ داد.');
+        showError("خطای ناشناخته‌ای رخ داد.");
       }
-    }    
+    }
   };
 
   return (
@@ -73,7 +76,7 @@ export default function SignupPage() {
         <Input
           label="نام و نام خانوادگی"
           icon={<UserRound size={18} />}
-          {...register('fullName')}
+          {...register("fullName")}
           error={errors.fullName?.message}
         />
 
@@ -81,7 +84,7 @@ export default function SignupPage() {
           label="شماره موبایل"
           type="tel"
           icon={<Phone size={18} />}
-          {...register('phone')}
+          {...register("phone")}
           error={errors.phone?.message}
         />
 
@@ -89,7 +92,7 @@ export default function SignupPage() {
           label="ایمیل"
           type="email"
           icon={<Mail size={18} />}
-          {...register('email')}
+          {...register("email")}
           error={errors.email?.message}
         />
 
@@ -98,7 +101,7 @@ export default function SignupPage() {
           type="password"
           icon={<Lock size={18} />}
           togglePassword
-          {...register('password')}
+          {...register("password")}
           error={errors.password?.message}
         />
 
@@ -109,7 +112,7 @@ export default function SignupPage() {
           type="password"
           togglePassword
           icon={<Lock size={18} />}
-          {...register('confirmPassword')}
+          {...register("confirmPassword")}
           error={errors.confirmPassword?.message}
         />
 
@@ -118,7 +121,7 @@ export default function SignupPage() {
         </Button>
 
         <p className="text-sm text-center text-gray-600">
-          قبلاً ثبت‌نام کرده‌اید؟{' '}
+          قبلاً ثبت‌نام کرده‌اید؟{" "}
           <Link
             href="/login"
             className="text-blue-600 hover:underline font-medium"

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import "../styles/fonts.css";
-
 import { Toaster } from "react-hot-toast";
+
+import "../styles/fonts.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",

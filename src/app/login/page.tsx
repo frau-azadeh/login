@@ -1,15 +1,18 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, type LoginSchema } from "@/schemas/auth.schema";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
+import { useForm } from "react-hook-form";
+
 import { supabase } from "@/lib/supabase";
-import { Mail, Lock } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { showError, showSuccess } from "@/lib/toast";
+import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
-import { showSuccess, showError } from "@/lib/toast";
+import { useRouter } from "next/navigation";
+
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+
+import { type LoginSchema, loginSchema } from "@/schemas/auth.schema";
 
 export default function LoginPage() {
   const {
@@ -34,7 +37,7 @@ export default function LoginPage() {
     } else {
       showSuccess("ورود موفقیت‌آمیز بود!");
       router.push("/dashboard");
-    }    
+    }
   };
 
   return (
